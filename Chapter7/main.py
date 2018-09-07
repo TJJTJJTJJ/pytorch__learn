@@ -132,7 +132,7 @@ def train(**kwargs):
         if (epoch+1)%opt.save_freq == 0:
             netg.save(opt.model_save_path,'netg_%s' %epoch)
             netd.save(opt.model_save_path,'netd_%s' %epoch)
-            fix_fake_imgs = val(netg,fix_noises,opt)
+            fix_fake_imgs = val(netg,fix_noises)
             tv.utils.save_image(fix_fake_imgs,'%s/%s.png' % (opt.img_save_path, epoch),normalize=True, range=(-1,1))
             # 和作者沟通后，因为数据集少，所以为了避免每次重置的噪声，多几个epoch再重置，等下试试每次重置的话这个误差的变化情况
             errord_meter.reset()
