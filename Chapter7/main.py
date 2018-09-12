@@ -93,7 +93,8 @@ def train(**kwargs):
                 error_d_real.backward()
                 # 假图片
                 noises.data.copy_(t.randn(opt.batch_size, opt.nz, 1, 1))
-                fake_img =  netg(noises).detach()
+                # 在第八章的时候想通了这里为什么要加detach，这个detach不是为了防止反向传播传到netg中，因为parameter已经保证了，是为了fake_output的requires_grad设置为False，不对fake_img求导，因为不需要，当然，在后来的实验室中我设置成没有也没有报错，但是这是为了节约内存，已经确定，可以停止反向传播，节约内存，与requires_grad=False的意义一样，但是requires_grad只能用于leaf节点，对于非leaf节点，使其不进行求导的方式是detach()
+                fake_img =  netg(noises).detach() 
                 fake_output = netd(fake_img)
                 error_d_fake = criterion(fake_output, fake_labels)
                 error_d_fake.backward()
