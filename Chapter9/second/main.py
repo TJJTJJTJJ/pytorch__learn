@@ -89,15 +89,15 @@ def train(**kwargs):
                 # x tensor size (seq_len, batch_size）
                 # 二重列表生成式, poetrys:[['我''你'],[..]]
 
-                # poetries = [[ix2word(word_) for word_ in x[:,j_]] for j_ in range(x.shape[1])]
-                origin_poetries =[]
-                origin_poetries_tmp = []
-                #  range(data_.shape[1]
-                for j_ in range(3):
-                    for word_ in x[:,j_].tolist():
-                        origin_poetries_tmp.append(ix2word[word_]) 
-                    origin_poetries.append(origin_poetries_tmp)
-                    origin_poetries_tmp = []
+                poetries = [[ix2word[word_] for word_ in x[:,j_]] for j_ in range(x.shape[1])]
+                # origin_poetries =[]
+                # origin_poetries_tmp = []
+                # #  range(data_.shape[1]
+                # for j_ in range(3):
+                #     for word_ in x[:,j_].tolist():
+                #         origin_poetries_tmp.append(ix2word[word_]) 
+                #     origin_poetries.append(origin_poetries_tmp)
+                #     origin_poetries_tmp = []
                 vis.log( '<br/>'.join([''.join(origin_poe) for origin_poe in origin_poetries]), win = u'origin_poem'  )
                 
                 # 生成的诗歌
